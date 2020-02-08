@@ -1,0 +1,11 @@
+[package]
+name = "mnumonic"
+version = "0.1.0"
+authors = ["Kartikaya Gupta <kats@trevize.staktrace.com>"]
+edition = "2018"
+
+[features]
+default = ["en"]
+en = []
+
+[dependencies]

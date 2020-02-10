@@ -1,5 +1,7 @@
 mnumonic
 ===
+[![Build Status](https://travis-ci.org/staktrace/mnumonic.svg?branch=master)](https://travis-ci.org/staktrace/mnumonic)
+[![Crate](https://img.shields.io/crates/v/mnumonic.svg)](https://crates.io/crates/mnumonic)
 
 This is a tiny Rust library that allows you to convert binary byte data to and from a phrase that is memorable for a human.
 It is useful for cases where you need a human to transfer certain information (e.g. an opaque identifier) between systems where copy/paste may not be readily available.

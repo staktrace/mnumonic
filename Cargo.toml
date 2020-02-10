@@ -12,8 +12,6 @@ readme = "README.md"
 keywords = ["human", "readable", "words", "encode", "convert"]
 categories = ["encoding", "text-processing", "value-formatting", "parsing", "gui"]
 
-exclude = ["words/**"]
-
 [badges]
 travis-ci = { repository = "staktrace/mnumonic" }
 maintenance = { status = "passively-maintained" }

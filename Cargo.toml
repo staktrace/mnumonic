@@ -5,6 +5,19 @@ authors = ["Kartikaya Gupta <kats@trevize.staktrace.com>"]
 edition = "2018"
 license = "0BSD"
 
+description = "A tiny library to convert opaque binary data to and from a human-memorable phrase"
+homepage = "https://github.com/staktrace/mnumonic/blob/master/README.md"
+repository = "https://github.com/staktrace/mnumonic"
+readme = "README.md"
+keywords = ["human", "readable", "words", "encode", "convert"]
+categories = ["encoding", "text-processing", "value-formatting", "parsing", "gui"]
+
+exclude = ["words/**"]
+
+[badges]
+travis-ci = { repository = "staktrace/mnumonic" }
+maintenance = { status = "passively-maintained" }
+
 [features]
 default = ["en"]
 en = []

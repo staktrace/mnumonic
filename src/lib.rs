@@ -11,6 +11,9 @@ fn words() -> Vec<&'static str> {
     let words : Vec<&'static str> = list.lines().collect();
     assert_eq!(words.len(), 256);
     // assert!(words.is_sorted()); // nightly only for now, see https://github.com/rust-lang/rust/issues/53485
+    for word in &words {
+        assert!(word.len() < 7);
+    }
     words
 }
 
@@ -99,8 +102,8 @@ mod tests {
     #[test]
     fn test_encode() {
         assert_eq!(encode_bytes(&[]), Vec::<&str>::new());
-        assert_eq!(encode_u32(0xDEADBEEF).join(" "), "sweet pump second tree".to_string());
-        assert_eq!(encode_u32(1234).join(" "), "ant star".to_string());
+        assert_eq!(encode_u32(0xDEADBEEF).join(" "), "table potato school true".to_string());
+        assert_eq!(encode_u32(1234).join(" "), "ant stamp".to_string());
         assert_eq!(encode_u32(5).join(" "), "apple".to_string());
         assert_eq!(encode_u32(0).join(" "), "able".to_string());
     }
@@ -108,14 +111,14 @@ mod tests {
     #[test]
     fn test_decode() {
         assert_eq!(decode_bytes(&[]).unwrap(), vec![]);
-        assert_eq!(decode_bytes(&["swEET", "pump", "second", "TREE"]).unwrap(), vec![0xDE, 0xAD, 0xBE, 0xEF]);
-        assert_eq!(decode_u32(&["ant", "star"]).unwrap(), 1234);
-        assert_eq!(decode_u32_joined("sweet pump second tree").unwrap(), 0xDEADBEEF);
+        assert_eq!(decode_bytes(&["taBLE", "potato", "school", "TRUE"]).unwrap(), vec![0xDE, 0xAD, 0xBE, 0xEF]);
+        assert_eq!(decode_u32(&["ant", "stamp"]).unwrap(), 1234);
+        assert_eq!(decode_u32_joined("table potato school true").unwrap(), 0xDEADBEEF);
     }
 
     #[test]
     fn test_decode_failure() {
         assert_eq!(decode_bytes(&["nonsense"]), Err(0));
-        assert_eq!(decode_u32(&["sweet", "pump", "second", "tree", "tree"]), Err(4));
+        assert_eq!(decode_u32(&["table", "potato", "school", "true", "true"]), Err(4));
     }
 }

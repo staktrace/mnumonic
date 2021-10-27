@@ -13,7 +13,6 @@ keywords = ["human", "readable", "words", "encode", "convert"]
 categories = ["encoding", "text-processing", "value-formatting", "parsing", "gui"]
 
 [badges]
-travis-ci = { repository = "staktrace/mnumonic" }
 maintenance = { status = "passively-maintained" }
 
 [features]

@@ -8,7 +8,7 @@ fn words() -> Vec<&'static str> {
     #[cfg(feature = "en")]
     let list = include_str!("../words/en.txt");
 
-    let words : Vec<&'static str> = list.lines().collect();
+    let words: Vec<&'static str> = list.lines().collect();
     assert_eq!(words.len(), 256);
     // assert!(words.is_sorted()); // nightly only for now, see https://github.com/rust-lang/rust/issues/53485
     for word in &words {
@@ -66,7 +66,9 @@ pub fn decode_bytes(encoded_words: &[&str]) -> Result<Vec<u8>, usize> {
     let mut result = Vec::new();
     let words = words();
     for (i, encoded) in encoded_words.iter().enumerate() {
-        let ix = words.binary_search(&encoded.to_lowercase().as_str()).map_err(|_| i)?;
+        let ix = words
+            .binary_search(&encoded.to_lowercase().as_str())
+            .map_err(|_| i)?;
         result.push(ix as u8);
     }
     Ok(result)
@@ -81,7 +83,7 @@ pub fn decode_u32(encoded_words: &[&str]) -> Result<u32, usize> {
     if bytes.len() > 4 {
         return Err(4);
     }
-    let mut result : u32 = 0;
+    let mut result: u32 = 0;
     for b in bytes {
         result = (result << 8) | (b as u32 & 0xFF);
     }
@@ -102,7 +104,10 @@ mod tests {
     #[test]
     fn test_encode() {
         assert_eq!(encode_bytes(&[]), Vec::<&str>::new());
-        assert_eq!(encode_u32(0xDEADBEEF).join(" "), "table potato school true".to_string());
+        assert_eq!(
+            encode_u32(0xDEADBEEF).join(" "),
+            "table potato school true".to_string()
+        );
         assert_eq!(encode_u32(1234).join(" "), "ant stamp".to_string());
         assert_eq!(encode_u32(5).join(" "), "apple".to_string());
         assert_eq!(encode_u32(0).join(" "), "able".to_string());
@@ -111,14 +116,23 @@ mod tests {
     #[test]
     fn test_decode() {
         assert_eq!(decode_bytes(&[]).unwrap(), vec![]);
-        assert_eq!(decode_bytes(&["taBLE", "potato", "school", "TRUE"]).unwrap(), vec![0xDE, 0xAD, 0xBE, 0xEF]);
+        assert_eq!(
+            decode_bytes(&["taBLE", "potato", "school", "TRUE"]).unwrap(),
+            vec![0xDE, 0xAD, 0xBE, 0xEF]
+        );
         assert_eq!(decode_u32(&["ant", "stamp"]).unwrap(), 1234);
-        assert_eq!(decode_u32_joined("table potato school true").unwrap(), 0xDEADBEEF);
+        assert_eq!(
+            decode_u32_joined("table potato school true").unwrap(),
+            0xDEADBEEF
+        );
     }
 
     #[test]
     fn test_decode_failure() {
         assert_eq!(decode_bytes(&["nonsense"]), Err(0));
-        assert_eq!(decode_u32(&["table", "potato", "school", "true", "true"]), Err(4));
+        assert_eq!(
+            decode_u32(&["table", "potato", "school", "true", "true"]),
+            Err(4)
+        );
     }
 }

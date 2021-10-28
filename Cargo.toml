@@ -11,6 +11,7 @@ repository = "https://github.com/staktrace/mnumonic"
 readme = "README.md"
 keywords = ["human", "readable", "words", "encode", "convert"]
 categories = ["encoding", "text-processing", "value-formatting", "parsing", "gui"]
+exclude = [".gitignore", ".github/**"]
 
 [badges]
 maintenance = { status = "passively-maintained" }
